@@ -14,8 +14,8 @@ public class File41 implements File {
     @Override
     public byte[] SendData() {
         byte[] data = new byte[0];
-        String code=FetchAppConfig.SN();
-        if (FetchAppConfig.SN().length()==8) {
+        String code = FetchAppConfig.SN();
+        if (FetchAppConfig.SN().length() == 8) {
             data = FetchAppConfig.SN().getBytes();
 
         }
@@ -23,11 +23,26 @@ public class File41 implements File {
         return data;
     }
 
-
     @Override
+    public byte[] analysis(int offest, byte[] data) {
+        byte[] roombyte = new byte[8];
+        System.arraycopy(data, offest, roombyte, 0, 8);
+        String code = "";
+        try {
+            code = new String(roombyte, "GB2312");
+        } catch (Exception e) {
+
+        }
+        Log.d("Field_41", code);
+
+        return roombyte;
+    }
+
+
+  /*  @Override
     public void analysis(byte[] data) {
 
-    }
+    }*/
 
 
     @Override

@@ -12,16 +12,30 @@ import com.unionpay.evergarden.unionpay.com.unionpay.evergarden.socket.Utils.Too
 public class File53 implements File {
     @Override
     public byte[] SendData() {
-        byte[] data={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+        byte[] data = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
         Log.d("Field_53", Tools.byte2hex(data));
         return data;
     }
 
-
     @Override
+    public byte[] analysis(int offest, byte[] data) {
+        byte[] roombyte = new byte[8];
+        System.arraycopy(data, offest, roombyte, 0, 8);
+        String code = "";
+        try {
+            code = Tools.byte2hex(roombyte);
+        } catch (Exception e) {
+
+        }
+        Log.d("Field_53", code);
+        return roombyte;
+    }
+
+
+/*    @Override
     public void analysis(byte[] data) {
 
-    }
+    }*/
 
 
     @Override

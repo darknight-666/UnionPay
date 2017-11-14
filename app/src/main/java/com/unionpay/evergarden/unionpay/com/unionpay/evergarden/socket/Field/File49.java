@@ -12,16 +12,24 @@ import com.unionpay.evergarden.unionpay.com.unionpay.evergarden.socket.Utils.Too
 public class File49 implements File {
     @Override
     public byte[] SendData() {
-        byte[] Senddata="156".getBytes();
+        byte[] Senddata = "156".getBytes();
         Log.d("Field_49", Tools.byte2hex(Senddata));
         return Senddata;
     }
 
-
     @Override
+    public byte[] analysis(int offest, byte[] data) {
+        byte[] roombyte = new byte[3];
+        System.arraycopy(data, offest, roombyte, 0, 3);
+        Log.d("Field49", Tools.byte2hex(roombyte));
+        return roombyte;
+    }
+
+
+/*    @Override
     public void analysis(byte[] data) {
 
-    }
+    }*/
 
 
     @Override

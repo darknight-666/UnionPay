@@ -13,29 +13,46 @@ import com.unionpay.evergarden.unionpay.com.unionpay.evergarden.socket.Utils.Too
 public class File63 implements File {
     private int Type;
 
-    public File63(int Type){
-            this.Type=Type;
+    public File63(int Type) {
+        this.Type = Type;
     }
 
     @Override
     public byte[] SendData() {
-        byte[] Senddata=new byte[0];
-        switch (Type){
+        byte[] Senddata = new byte[0];
+        switch (Type) {
             case Config.SginMessage:
-                byte[] len={0x00,0x03};
-                 Senddata= Tools.MergeArray(len,Field_63_1());
+                byte[] len = {0x00, 0x03};
+                Senddata = Tools.MergeArray(len, Field_63_1());
                 break;
         }
         Log.d("Field_63", Tools.byte2hex(Senddata));
         return Senddata;
     }
 
-    //签到 操作员号
-    public byte[] Field_63_1(){
+    @Override
+    public byte[] analysis(int offest, byte[] data) {
+        byte[] lenbyte = new byte[2];
+        Log.d("offest", offest + "");
+        System.arraycopy(data, offest, lenbyte, 0, 2);
+        Log.d("2", "1");
+        int len = Integer.parseInt(Tools.byte2hex(lenbyte));
+        Log.d("offest", offest + "");
 
-        switch (Type){
+        byte[] roombyte = new byte[len];
+
+        System.arraycopy(data, offest, roombyte, 0, len);
+
+        Log.d("File55", Tools.bcd2Str(roombyte));
+        return roombyte;
+    }
+
+    //签到 操作员号
+    public byte[] Field_63_1() {
+
+        switch (Type) {
             case Config.SginMessage:
-                byte[] bytes="099".getBytes();
+                byte[] bytes = "099".getBytes();
                 return bytes;
 
         }
@@ -46,10 +63,10 @@ public class File63 implements File {
 
 
 
-    @Override
+    /*@Override
     public void analysis(byte[] data) {
 
-    }
+    }*/
 
 
     @Override
